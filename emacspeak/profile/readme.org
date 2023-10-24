@@ -1,0 +1,18 @@
+Given an emacs profile, recorded with
+
+#+begin_src emacs interactive M-x command
+  profiler-start
+#+end_src
+
+Followed by 
+#+begin_src emacs interactive M-x command
+  profiler-report
+#+end_src
+
+now save those results and run this command on them
+
+#+RESULTS:
+
+#+begin_src sh
+  python profile.py profile1 > profile1.json
+#+end_src
