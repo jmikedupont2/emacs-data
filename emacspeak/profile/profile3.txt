@@ -1,0 +1,16 @@
+          49  56% - command-execute
+          49  56%  - call-interactively
+          49  56%   - funcall-interactively
+          49  56%    - eval-defun
+          49  56%     - elisp--eval-defun
+          49  56%      - eval-region
+          49  56%       - setq
+          49  56%        - let
+          49  56%         - save-current-buffer
+          49  56%          - set-buffer
+          49  56%           - debug
+          49  56%            - recursive-edit
+          23  26%             + timer-event-handler
+          23  26%             + command-execute
+           3   3%               redisplay_internal (C function)
+          37  43% + ...
