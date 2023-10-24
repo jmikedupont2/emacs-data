@@ -14,3 +14,5 @@ I am still learning org mode
 
 In order to make content addressessable in git you need to keep the files small.
 we want to then piece them together.
+
+org mode and pandoc offer a good way to do that.
