@@ -1,0 +1,3 @@
+[submodule "vendor/emacs/org/org-rifle"]
+	path = vendor/emacs/org/org-rifle
+	url = https://github.com/alphapapa/org-rifle
