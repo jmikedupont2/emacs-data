@@ -1,3 +1,6 @@
 [submodule "vendor/emacs/org/org-rifle"]
 	path = vendor/emacs/org/org-rifle
 	url = https://github.com/alphapapa/org-rifle
+[submodule "vendor/emacs/org/org-ql"]
+	path = vendor/emacs/org/org-ql
+	url = https://github.com/alphapapa/org-ql
