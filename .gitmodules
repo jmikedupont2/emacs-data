@@ -5,7 +5,7 @@
 	path = vendor/emacs/org/org-ql
 	url = https://github.com/alphapapa/org-ql
 [submodule "vendor/streamlit-hackathon"]
-	path = vendor/streamlit-hackathon
+	path = vendor/hackathons/streamlit
 	url = https://github.com/meta-introspector/https-streamlit.io-community-llm-hackathon-2023
 [submodule "vendor/emacs/Elsa"]
 	path = vendor/emacs/Elsa
