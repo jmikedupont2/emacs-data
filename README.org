@@ -10,3 +10,7 @@ see vendors for git submodules
 emacspeak contains samples and profiles from emacspeak 
 
 I am still learning org mode
+
+
+In order to make content addressessable in git you need to keep the files small.
+we want to then piece them together.
