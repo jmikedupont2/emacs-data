@@ -4,3 +4,15 @@
 [submodule "vendor/emacs/org/org-ql"]
 	path = vendor/emacs/org/org-ql
 	url = https://github.com/alphapapa/org-ql
+[submodule "vendor/streamlit-hackathon"]
+	path = vendor/streamlit-hackathon
+	url = https://github.com/meta-introspector/https-streamlit.io-community-llm-hackathon-2023
+[submodule "vendor/emacs/Elsa"]
+	path = vendor/emacs/Elsa
+	url = https://github.com/meta-introspector/Elsa
+[submodule "vendor/emacs/elpy"]
+	path = vendor/emacs/elpy
+	url = https://github.com/jmikedupont2/elpy
+[submodule "vendor/apache/arrow"]
+	path = vendor/apache/arrow
+	url = https://github.com/apache/arrow.git
