@@ -1,0 +1,6 @@
+* emacs-data
+  :PROPERTIES:
+  :CUSTOM_ID: emacs-data
+  :END:
+
+data repo for emacs introspection
