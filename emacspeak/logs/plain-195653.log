@@ -1,0 +1,16 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Process Speaker not running:  }
+c { }
+c { }
+c {   }
+q {exited abnormally with code 127 }
+c { }
+c {   }
+c { }
+d
+s
+s
+l {t}

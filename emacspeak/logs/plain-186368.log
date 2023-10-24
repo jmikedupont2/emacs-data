@@ -1,0 +1,23 @@
+s
+tts_sync_state all 1 1 175
+c { }
+c {   }
+q {cap }
+c { }
+c {   }
+q {Autospeak }
+c { }
+c {   }
+q {emacspeak-speak.el }
+c { }
+c {   }
+q { 72%  }
+c { }
+c {   }
+q { git:master }
+c { }
+q { edited  }
+c {   }
+q {elisp:l }
+c { }
+d

@@ -1,0 +1,7 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {total 36 -rw-rw-r-- 1 mdupont mdupont 2482 Oct 24 09:12 sexpr.py -rw-rw-r-- 1 mdupont mdupont  489 Oct 24 09:12 README.md -rw-rw-r-- 1 mdupont mdupont 1521 Oct 24 09:12 json_sexpr.py -rw-rw-r-- 1 mdupont mdupont   13 Oct 24 09:12 .gitignore drwxrwxr-x 8 mdupont mdupont 4096 Oct 24 09:12 .git -rw-rw-r-- 1 mdupont mdupont  146 Oct 24 09:12 example_lisp.txt -rw-rw-r-- 1 mdupont mdupont  133 Oct 24 09:12 example_json.json drwxrwxr-x 3 mdupont mdupont 4096 Oct 24 09:12 .  }
+c { }
+q {drwxrwxr-x 4 mdupont mdupont 4096 Oct 24 09:20 ..  }
+d

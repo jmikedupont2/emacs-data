@@ -1,0 +1,12 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {c  left brace   right brace  }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+q {c  left brace     right brace  }
+d

@@ -1,0 +1,17 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Autospeak }
+c { }
+q {/tmp/ }
+c {   }
+q {*shell* }
+c { }
+c {   }
+q { bottom  }
+c { }
+c {   }
+q {shell }
+c { }
+d

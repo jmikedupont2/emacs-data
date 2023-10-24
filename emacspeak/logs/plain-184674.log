@@ -1,0 +1,9 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Kill buffer (default plain-183483.log):  }
+c { }
+c { }
+q {plain-183483.log }
+d

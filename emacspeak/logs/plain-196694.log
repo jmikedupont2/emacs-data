@@ -1,0 +1,30 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {elif }
+c { }
+c {   }
+q {type }
+c { }
+q {(obj)  }
+c { }
+c {   }
+q {== }
+c { }
+c { }
+c {   }
+q {dict }
+c { }
+q {: }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {return }
+c { }
+q { to_s_list(obj) }
+d

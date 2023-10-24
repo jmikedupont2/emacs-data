@@ -1,0 +1,23 @@
+s
+tts_sync_state all 1 1 175
+c { }
+c {   }
+q {indent 2 }
+c { }
+c {   }
+q {" }
+c { }
+c { }
+c {   }
+q {cap }
+c { }
+c {   }
+q {Speak the last message from  }
+c { }
+c {   }
+q {cap }
+c { }
+c {   }
+q {Emacs once again. }
+c { }
+d

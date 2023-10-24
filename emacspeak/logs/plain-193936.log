@@ -1,0 +1,8 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {4   0% +  }
+c {   }
+q {undo-auto--add-boundary }
+c { }
+d

@@ -1,0 +1,33 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {return }
+c { }
+c {   }
+q {' }
+c { }
+c { }
+c {   }
+q {(dict  }
+c { }
+c {   }
+q { left brace  right brace  }
+c { }
+c {   }
+q {)' }
+c { }
+q {. }
+c {   }
+q {format }
+c { }
+q {( }
+c {   }
+q {'  }
+c { }
+c { }
+c {   }
+q {' }
+c { }
+q {.join(pairs)) }
+d

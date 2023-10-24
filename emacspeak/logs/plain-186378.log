@@ -1,0 +1,10 @@
+s
+tts_sync_state all 1 1 175
+c { }
+c {   }
+q {cap }
+c { }
+c {   }
+q {Quit }
+c { }
+d

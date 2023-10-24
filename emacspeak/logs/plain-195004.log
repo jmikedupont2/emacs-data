@@ -1,0 +1,81 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {2c2  less than   left bracket profiler-profile " }
+c { }
+q {28.1"  }
+c { }
+q {cpu  pound s(hash-table size 217 test equal rehash-size 1.5 rehash-threshold 0.8125 data ( left bracket commandp "  }
+c { }
+q {pound  less than compiled 0x1a044bbfab7c1572 greater than "  }
+c { }
+q {mapatoms execute-extended-command--shorter "  }
+c { }
+q {pound  less than compiled -0xea032d16e4ce6fc greater than "  }
+c { }
+q {apply timer-event-handler nil nil nil nil nil nil nil nil nil right bracket  12  left bracket completion-pcm--merge-completions completion-pcm--merge-try completion-pcm-try-completion "  }
+c { }
+q {pound  less than compiled 0x782f13afaff8e83 greater than "  }
+c { }
+q {"  }
+c { }
+q {pound  less than compiled -0x15c455442ba6676a greater than "  }
+c { }
+q {mapc seq-do seq-some completion--nth-completion completion-try-completion execute-extended-command--shorter "  }
+c { }
+q {pound  less than compiled -0xea032d16e4ce6fc greater than "  }
+c { }
+q {apply timer-event-handler nil nil right bracket  4  left bracket all-completions completion-pcm--all-completions completion-pcm--find-all-completions completion-pcm-try-completion "  }
+c { }
+q {pound  less than compiled 0x782f18820ab8e83 greater than "  }
+c { }
+q {"  }
+c { }
+q {pound  less than compiled -0x15c455442ba6676a greater than "  }
+c { }
+q {mapc seq-do seq-some completion--nth-completion completion-try-completion execute-extended-command--shorter "  }
+c { }
+q {pound  less than compiled -0xea032d16e4ce6fc greater than "  }
+c { }
+q {apply timer-event-handler nil right bracket  4  left bracket redisplay_internal backslash   backslash (C backslash  function backslash )  }
+c { }
+q {read-from-minibuffer completing-read-default completing-read read-file-name-default read-file-name find-file-read-args byte-code call-interactively command-execute nil nil nil nil nil nil right bracket  14  left bracket read-from-minibuffer completing-read-default completing-read read-file-name-default read-file-name find-file-read-args byte-code call-interactively command-execute nil nil nil nil nil nil nil right bracket  20  left bracket locate-file-internal locate-file executable-find magit-turn-on-auto-revert-mode-if-desired magit-auto-revert-mode-enable-in-buffers run-hooks normal-mode after-find-file find-file-noselect-1 find-file-noselect find-file funcall-interactively call-interactively command-execute nil nil right bracket  4  left bracket call-process apply process-file apply magit-process-file apply magit-process-git magit-git-str apply magit-rev-parse-safe magit-toplevel magit-turn-on-auto-revert-mode-if-desired magit-auto-revert-mode-enable-in-buffers run-hooks normal-mode after-find-file right bracket  2  left bracket backtrace-frame "  }
+c { }
+q {pound  less than compiled -0x9cb81a486ecebee greater than "  }
+c { }
+q {called-interactively-p auto-revert-mode magit-turn-on-auto-revert-mode-if-desired magit-auto-revert-mode-enable-in-buffers run-hooks normal-mode after-find-file find-file-noselect-1 find-file-noselect find-file funcall-interactively call-interactively command-execute nil right bracket  2  left bracket string-match "  }
+c { }
+q {pound  less than compiled -0x6ed7768ed9885d2 greater than "  }
+c { }
+q {"  }
+c { }
+q {pound  less than compiled -0xcb8a77693ba780c greater than "  }
+c { }
+q {sort sort-coding-systems find-coding-systems-region select-safe-coding-system secure-hash "  }
+c { }
+q {pound  less than compiled -0xbb38ced3e67d73f greater than "  }
+c { }
+q {org-persist--normalize-associated org-persist--get-collection org-persist-register org-element-cache-reset org-mode set-auto-mode-0 set-auto-mode--apply-alist right bracket  4  left bracket "  }
+c { }
+q {pound  less than compiled 0xd05e1b904678b0e greater than "  }
+c { }
+q {sort add-hook "  }
+c { }
+q {pound  less than compiled -0x13c5d909dea1b890 greater than "  }
+c { }
+q {run-hooks apply run-mode-hooks org-mode set-auto-mode-0 set-auto-mode--apply-alist set-auto-mode normal-mode after-find-file find-file-noselect-1 find-file-noselect find-file right bracket  4  left bracket tty-color-standard-values tty-color-desc redisplay_internal backslash   backslash (C backslash  function backslash )  }
+c { }
+q {nil nil nil nil nil nil nil nil nil nil nil nil nil right bracket  11  left bracket line-end-position back-to-indentation show-paren--locate-near-paren show-paren--default show-paren-function apply timer-event-handler nil nil nil nil nil nil nil nil nil right bracket  4  left bracket terminal-live-p framep-on-display display-multi-font-p default-font-height default-line-height line-move-partial line-move next-line funcall-interactively call-interactively command-execute nil nil nil nil nil right bracket  1  left bracket redisplay_internal backslash   backslash (C backslash  function backslash )  }
+c { }
+q {nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil right bracket  197  left bracket assoc-string org-src-font-lock-fontify-block org-fontify-meta-lines-and-blocks-1 org-fontify-meta-lines-and-blocks font-lock-fontify-keywords-region font-lock-default-fontify-region font-lock-fontify-region "  }
+c { }
+q {pound  less than compiled -0x73374669e4440e7 greater than "  }
+c { }
+q {run-hook-wrapped jit-lock--run-functions jit-lock-fontify-now jit-lock-function redisplay_internal backslash   backslash (C backslash  function backslash )  }
+c { }
+q {nil nil nil right bracket  3  left bracket org-fold-core-update-optimisation org-unfontify-region font-lock-unfontify-region font-lock-default-fontify-region font-lock-fontify-region "  }
+c { }
+q {pound  less than compiled -0x733745a9e49c0e7 greater than "  }
+c { }
+q {run-hook }
+d

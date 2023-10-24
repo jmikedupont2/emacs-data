@@ -1,0 +1,14 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {bottom  }
+c { }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+q {log-plain }
+d

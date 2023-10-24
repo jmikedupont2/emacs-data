@@ -1,0 +1,20 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Autospeak }
+c { }
+c {   }
+q {install.org }
+c { }
+c {   }
+q { bottom  }
+c { }
+c {   }
+q { 2  git:master }
+c { }
+q { edited  }
+c {   }
+q {org }
+c { }
+d

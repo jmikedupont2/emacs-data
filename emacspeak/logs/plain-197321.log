@@ -1,0 +1,35 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {Traceback (most recent call last):    }
+c { }
+q {File " }
+c { }
+q {/mnt/data1/2023/10/24/json-sexpr/json_sexpr.py",  }
+c { }
+q {line 35,  }
+c { }
+q {in  less than module greater than      result = convert(in_str)                }
+c { }
+q {aw 15 ^    }
+c { }
+q {File " }
+c { }
+q {/mnt/data1/2023/10/24/json-sexpr/json_sexpr.py",  }
+c { }
+q {line 10,  }
+c { }
+q {in json_to_sexpr     return sexpr.to_s(json.loads(json_str))                         }
+c { }
+q {aw 20 ^    }
+c { }
+q {File " }
+c { }
+q {/home/mdupont/.pyenv/versions/3.11.4/lib/python3.11/json/__init__.py",  }
+c { }
+q {line 346,  }
+c { }
+q {in loads  }
+d
+s
+tts_sync_state all 1 0 175

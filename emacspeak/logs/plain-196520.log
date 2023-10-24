@@ -1,0 +1,9 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {ls:  }
+c { }
+q {cannot access '/tmp/profile':  }
+c { }
+q {No such file or directory  }
+d

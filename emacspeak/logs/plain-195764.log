@@ -1,0 +1,11 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {remote:  }
+c { }
+q {Total 218947 (delta 42),  }
+c { }
+q {reused 74 (delta 35),  }
+c { }
+q {pack-reused 218849          }
+d

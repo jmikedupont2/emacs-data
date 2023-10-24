@@ -1,0 +1,16 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Autospeak }
+c { }
+c {   }
+q {plain-183510.log }
+c { }
+c {   }
+q { top  }
+c { }
+c {   }
+q {fundamental }
+c { }
+d

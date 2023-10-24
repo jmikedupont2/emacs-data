@@ -1,0 +1,15 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Switch to buffer (default magit:  }
+c { }
+c { }
+c {   }
+q {emacspeak):  }
+c { }
+c { }
+q {magit:  }
+c { }
+q {emacspeak }
+d

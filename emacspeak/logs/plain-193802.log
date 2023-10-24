@@ -1,0 +1,48 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {8   0%    -  }
+c {   }
+q {dtk-org-fold }
+c { }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+q {8   0%     -  }
+c {   }
+q {org-fold-initialize }
+c { }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+q {8   0%      -  }
+c {   }
+q {org-fold-core-initialize }
+c { }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+q {8   0%       -  }
+c {   }
+q {org-fold-core-add-folding-spec }
+c { }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+q {8   0%        -  }
+c {   }
+q {org-fold-core--property-symbol-get-create }
+c { }
+d

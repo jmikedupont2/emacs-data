@@ -1,0 +1,11 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {process Speaker no longer connected to pipe;  }
+c { }
+c { }
+c {   }
+q {closed it }
+c { }
+d

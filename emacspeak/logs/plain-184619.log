@@ -1,0 +1,11 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Run grep (like this):  }
+c { }
+c { }
+q {grep --color=auto -nH --null -e grep --color=auto -nH --null ''   }
+c { }
+q {*.log }
+d

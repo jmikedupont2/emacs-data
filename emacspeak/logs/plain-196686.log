@@ -1,0 +1,23 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {return }
+c { }
+c {   }
+q {'"' }
+c { }
+c { }
+c {   }
+q {+ }
+c { }
+c { }
+q {obj  }
+c {   }
+q {+ }
+c { }
+c { }
+c {   }
+q {'"' }
+c { }
+d

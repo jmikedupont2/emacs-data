@@ -1,0 +1,11 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {error:  }
+c { }
+q {pathspec 'feature/introspector'  }
+c { }
+q {did not match any file(s)  }
+c { }
+q {known to git  }
+d

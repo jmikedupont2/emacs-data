@@ -1,0 +1,115 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {left bracket profiler-profile " }
+c { }
+q {28.1"  }
+c { }
+q {cpu  pound s(hash-table size 97 test equal rehash-size 1.5 rehash-threshold 0.8125 data ( left bracket commandp "  }
+c { }
+q {pound  less than compiled 0x1a044bbfab7c1572 greater than "  }
+c { }
+q {mapatoms execute-extended-command--shorter "  }
+c { }
+q {pound  less than compiled -0x1d55f42b8894cdf2 greater than "  }
+c { }
+q {apply "  }
+c { }
+q {pound  less than compiled -0x167c2356826460ed greater than "  }
+c { }
+q {ad-Advice-timer-event-handler apply timer-event-handler nil nil nil nil nil nil right bracket  4  left bracket all-completions completion-pcm--all-completions completion-pcm--find-all-completions completion-pcm-try-completion "  }
+c { }
+q {pound  less than compiled 0x782f13afaee8e83 greater than "  }
+c { }
+q {"  }
+c { }
+q {pound  less than compiled -0x15c455442ba6676a greater than "  }
+c { }
+q {mapc seq-do seq-some completion--nth-completion completion-try-completion execute-extended-command--shorter "  }
+c { }
+q {pound  less than compiled -0x1d55f42b8894cdf2 greater than "  }
+c { }
+q {apply "  }
+c { }
+q {pound  less than compiled -0x167c2356826460ed greater than "  }
+c { }
+q {ad-Advice-timer-event-handler right bracket  8  left bracket try-completion completion-basic-try-completion "  }
+c { }
+q {pound  less than compiled 0x782f01afaf38e83 greater than "  }
+c { }
+q {"  }
+c { }
+q {pound  less than compiled -0x15c455442ba6676a greater than "  }
+c { }
+q {mapc seq-do seq-some completion--nth-completion completion-try-completion execute-extended-command--shorter "  }
+c { }
+q {pound  less than compiled -0x1d55f42b8894cdf2 greater than "  }
+c { }
+q {apply "  }
+c { }
+q {pound  less than compiled -0x167c2356826460ed greater than "  }
+c { }
+q {ad-Advice-timer-event-handler apply timer-event-handler right bracket  8  left bracket auto-revert-buffer "  }
+c { }
+q {pound  less than compiled 0x7a5ca760a83bc70 greater than "  }
+c { }
+q {auto-revert-buffers--buffer-list-filter apply auto-revert-buffers apply "  }
+c { }
+q {pound  less than compiled -0x167c2356826460ed greater than "  }
+c { }
+q {ad-Advice-timer-event-handler apply timer-event-handler nil nil nil nil nil nil right bracket  4  left bracket string-match do-after-load-evaluation load ems--fastload voice-setup dtk-initialize dtk-speak emacspeak-speak-line ad-Advice-next-line apply next-line "  }
+c { }
+q {pound  less than subr funcall-interactively greater than "  }
+c { }
+q {apply ad-Advice-funcall-interactively apply funcall-interactively right bracket  33  left bracket nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil right bracket  56  left bracket line-move-partial line-move "  }
+c { }
+q {pound  less than compiled 0x84c0e445c4afda7 greater than "  }
+c { }
+q {ad-Advice-next-line apply next-line "  }
+c { }
+q {pound  less than subr funcall-interactively greater than "  }
+c { }
+q {apply ad-Advice-funcall-interactively apply funcall-interactively call-interactively command-execute nil nil nil right bracket  1  left bracket format voice-acss-from-speech-style voice-setup-acss-from-style "  }
+c { }
+q {pound  less than compiled -0x1b94bafd7ee39e60 greater than "  }
+c { }
+q {custom-initialize-reset custom-declare-variable byte-code load ems--fastload voice-setup dtk-initialize dtk-speak emacspeak-speak-line ad-Advice-next-line apply next-line right bracket  4  left bracket format voice-acss-from-speech-style voice-setup-acss-from-style "  }
+c { }
+q {pound  less than compiled -0x1b94bafd71a01e60 greater than "  }
+c { }
+q {custom-initialize-reset custom-declare-variable byte-code load ems--fastload voice-setup dtk-initialize dtk-speak emacspeak-speak-header-line emacspeak-speak-mode-line ad-Advice-delete-other-windows apply right bracket  4  left bracket redisplay_internal backslash   backslash (C backslash  function backslash )  }
+c { }
+q {nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil right bracket  28  left bracket internal-timer-start-idle nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil right bracket  2  left bracket vertical-motion line-move-1 line-move "  }
+c { }
+q {pound  less than compiled -0x8349823bca8a0d1 greater than "  }
+c { }
+q {ad-Advice-previous-line apply previous-line "  }
+c { }
+q {pound  less than subr funcall-interactively greater than "  }
+c { }
+q {apply ad-Advice-funcall-interactively apply funcall-interactively call-interactively command-execute nil nil right bracket  18  left bracket elisp--font-lock-flush-elisp-buffers run-hook-with-args do-after-load-evaluation load ems--fastload voice-setup dtk-initialize dtk-speak emacspeak-speak-line ad-Advice-previous-line apply previous-line "  }
+c { }
+q {pound  less than subr funcall-interactively greater than "  }
+c { }
+q {apply ad-Advice-funcall-interactively apply right bracket  4  left bracket string-match dtk-audio-format dtk-speak emacspeak-speak-line ad-Advice-previous-line apply previous-line "  }
+c { }
+q {pound  less than subr funcall-interactively greater than "  }
+c { }
+q {apply ad-Advice-funcall-interactively apply funcall-interactively call-interactively command-execute nil nil right bracket  3  left bracket emacspeak-speak-line ad-Advice-previous-line apply previous-line "  }
+c { }
+q {pound  less than subr funcall-interactively greater than "  }
+c { }
+q {apply ad-Advice-funcall-interactively apply funcall-interactively call-interactively command-execute nil nil nil nil nil right bracket  2  left bracket "  }
+c { }
+q {pound  less than subr make-process greater than "  }
+c { }
+q {apply make-process--with-editor-process-filter apply make-process apply start-process dtk-make-process dtk-initialize dtk-speak emacspeak-speak-line ad-Advice-previous-line apply previous-line "  }
+c { }
+q {pound  less than subr funcall-interactively greater than "  }
+c { }
+q {apply right bracket  8  left bracket re-search-forward dtk-replace-duplicates "  }
+c { }
+q {pound  less than compiled 0x11a07eab87be6492 greater than "  }
+c { }
+q {mapc dtk-handle-repeating-patterns dtk-speak emacspeak-speak-li }
+d

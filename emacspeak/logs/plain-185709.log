@@ -1,0 +1,13 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {rm:  }
+c { }
+q {cannot remove '23lcd':  }
+c { }
+q {No such file or directory rm:  }
+c { }
+q {cannot remove 'e':  }
+c { }
+q {No such file or directory mdupont@mdupont-G470:~$  }
+d

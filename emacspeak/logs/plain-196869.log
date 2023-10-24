@@ -1,0 +1,16 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {Autospeak }
+c { }
+c {   }
+q {json-sexpr }
+c { }
+c {   }
+q { 34%  }
+c { }
+c {   }
+q {dired by name }
+c { }
+d

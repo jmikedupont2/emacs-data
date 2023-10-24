@@ -1,0 +1,7 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {Cloning into 'json-sexpr'  }
+c { }
+q {aw 3 .  }
+d

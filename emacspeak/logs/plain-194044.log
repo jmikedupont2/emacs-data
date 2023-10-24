@@ -1,0 +1,18 @@
+s
+tts_sync_state all 1 0 175
+c { }
+q {56  10% -  }
+c {   }
+q {emacspeak-error-handler }
+c { }
+d
+s
+s
+s
+tts_sync_state all 1 0 175
+c { }
+q {48   8%  +  }
+c {   }
+q {dtk-speak-and-echo }
+c { }
+d

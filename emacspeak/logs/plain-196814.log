@@ -1,0 +1,21 @@
+s
+tts_sync_state all 1 0 175
+c { }
+c {   }
+q {if }
+c { }
+q { first.isdigit()  }
+c { }
+c {   }
+q {or }
+c { }
+q { first  }
+c {   }
+q {== }
+c { }
+c { }
+c {   }
+q {'.' }
+c { }
+q {: }
+d
