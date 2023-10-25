@@ -31,3 +31,18 @@
 [submodule "vendor/tools/glaredb"]
 	path = vendor/tools/glaredb
 	url = https://github.com/GlareDB/glaredb
+[submodule "vendor/tools/burn"]
+	path = vendor/tools/burn
+	url = https://github.com/burn-rs/burn
+[submodule "vendor/emacs/modes/rust-mode"]
+	path = vendor/emacs/modes/rust-mode
+	url = https://github.com/rust-lang/rust-mode.git/
+[submodule "vendor/emacs/packaging/eask"]
+	path = vendor/emacs/packaging/eask
+	url = https://github.com/emacs-eask/eask
+[submodule "vendor/emacs/packaging/eask-mode"]
+	path = vendor/emacs/packaging/eask-mode
+	url = https://github.com/emacs-eask/eask-mode
+[submodule "vendor/emacs/packaging/cli"]
+	path = vendor/emacs/packaging/cli
+	url = https://github.com/emacs-eask/cli
