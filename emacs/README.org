@@ -1,0 +1,15 @@
+
+```
+git clone https://git.savannah.gnu.org/git/emacs.git
+cd emacs
+autogen.sh
+./configure --enable-profiling
+sudo make install
+```
+
+Then running `emacs-30.0.50 ` will produce the `gmon.out` file.
+that you can process with
+
+```
+gperf `emacs-30.0.50` > report.txt
+```

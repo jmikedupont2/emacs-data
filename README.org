@@ -27,3 +27,37 @@ This repository is a valuable resource for anyone interested in Emacs introspect
 #+BEGIN_COMMENT
 You can customize this document further, adding specific data, links, and formatting as needed.
 #+END_COMMENT
+
+* Ideas
+** analysis
+*** static analysis
+*** dynamic analysis
+perf
+
+Consider this attempt at an org mode babel script,
+we want to get the current emacs pid and then record its activity.
+#+begin_src shell :var PID=(emacs-pid) :async
+   #echo $PID
+   sudo perf record --all-cpus --realtime=1 --pid $PID --output last-recording --count=1000 &
+   #disown
+   #sudo perf record --help
+
+#+end_src
+
+#+RESULTS:
+
+#+begin_src shell
+
+   sudo perf report --input=last-recording
+   #disown
+   #sudo perf record --help
+
+#+end_src
+
+profile emacs
+emacs-lisp profiling
+
+execrcising the code
+
+Test of using emacs
+
