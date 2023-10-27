@@ -1,15 +1,66 @@
+* Building and Profiling Emacs
 
-```
-git clone https://git.savannah.gnu.org/git/emacs.git
-cd emacs
-autogen.sh
-./configure --enable-profiling
-sudo make install
-```
+  Here are the steps to clone, build, and profile Emacs to generate a `gmon.out` file for further analysis.
 
-Then running `emacs-30.0.50 ` will produce the `gmon.out` file.
-that you can process with
+  1. Clone the Emacs repository from Git:
 
-```
-gperf `emacs-30.0.50` > report.txt
-```
+     ```shell
+     git clone https://git.savannah.gnu.org/git/emacs.git
+     ```
+
+     This command will create a local copy of the Emacs source code.
+
+  2. Change into the Emacs source code directory:
+
+     ```shell
+     cd emacs
+     ```
+
+     You're now in the Emacs source code directory.
+
+  3. Run `autogen.sh` to prepare the build environment:
+
+     ```shell
+     ./autogen.sh
+     ```
+
+     This script sets up the necessary build files.
+
+  4. Configure the build with profiling enabled:
+
+     ```shell
+     ./configure --enable-profiling
+     ```
+
+     This step ensures that profiling information will be collected during the build.
+
+  5. Build and install Emacs:
+
+     ```shell
+     sudo make install
+     ```
+
+     The `sudo` command is used because installation typically requires administrative privileges.
+
+* Profiling and Generating a Report
+
+  Once you have successfully built Emacs with profiling enabled, you can run it to produce a `gmon.out` file. After that, you can generate a report using `gperf`.
+
+  1. Run the Emacs version you built (e.g., `emacs-30.0.50`):
+
+     Running this specific version will produce the `gmon.out` file, containing profiling data.
+
+  2. To process the `gmon.out` file and generate a report, use the `gperf` tool:
+
+     ```shell
+     gperf `emacs-30.0.50` > report.txt
+     ```
+
+     This command will analyze the profiling data and create the `report.txt` file.
+
+* Analyzing the Report
+
+  You can now analyze the `report.txt` file to gain insights into Emacs's performance and behavior.
+
+  Feel free to customize the process and analysis further according to your needs.
+
