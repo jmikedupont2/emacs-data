@@ -54,7 +54,9 @@ we want to get the current emacs pid and then record its activity.
 
 #+end_src
 
-profile emacs
+[[file:emacs/README.org][profile emacs itself]]
+
+
 emacs-lisp profiling
 
 execrcising the code
