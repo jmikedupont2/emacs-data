@@ -46,3 +46,9 @@
 [submodule "vendor/emacs/packaging/cli"]
 	path = vendor/emacs/packaging/cli
 	url = https://github.com/emacs-eask/cli
+[submodule "vendor/emacs/lsp/emacs-ccls"]
+	path = vendor/emacs/lsp/emacs-ccls
+	url = https://github.com/emacs-lsp/emacs-ccls
+[submodule "vendor/emacs/lsp/ccls"]
+	path = vendor/emacs/lsp/ccls
+	url = https://github.com/MaskRay/ccls

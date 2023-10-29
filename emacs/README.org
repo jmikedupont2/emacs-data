@@ -97,3 +97,11 @@ Certainly, let's provide an interpretation of the functions and paint a picture 
 ```
 
 This narrative provides a high-level understanding of the functions and their potential roles within Emacs, based on their time consumption and frequency of calls. It can be a starting point for further analysis and optimization efforts.
+
+
+#+begin_src shell
+  gprof --annotated-source=exec_byte_code /usr/local/bin/emacs-30.0.50  > exec_byte_code.txt
+#+end_src
+
+#+RESULTS:
+But the results are poor it shows only one line. 

@@ -35,7 +35,8 @@ You can customize this document further, adding specific data, links, and format
 perf
 
 Consider this attempt at an org mode babel script,
-we want to get the current emacs pid and then record its activity.
+we want to get the current emacs pid and then record its activity
+ob-async-org-babel-execute-src-block
 #+begin_src shell :var PID=(emacs-pid) :async
    #echo $PID
    sudo perf record --all-cpus --realtime=1 --pid $PID --output last-recording --count=1000 &
@@ -44,22 +45,627 @@ we want to get the current emacs pid and then record its activity.
 
 #+end_src
 
-#+RESULTS:
+now lets exercize emacs
 
-#+begin_src shell
-
-   sudo perf report --input=last-recording
-   #disown
-   #sudo perf record --help
-
+ob-async-org-babel-execute-src-block is what is needed for ob-async
+#+begin_src elisp
+  
+    (straight-use-package 'ob-async)
+  (straight-use-package 'org-ql)
+  (straight-use-package 'helm-org-ql)
+  (straight-use-package 'org-roam-ql)
+  (straight-use-package 'org-mode)
 #+end_src
 
-[[file:emacs/README.org][profile emacs itself]]
+#+RESULTS:
+: t
 
+#+begin_src shell
+  sudo perf report --input=last-recording
+  #disown
+  #sudo perf record --help
+#+end_src
+
+#+RESULTS:
+|     # | To       | display           | the               | perf.data                                  | header             | info, | please | use   | --header/--header-only | options. |                 |    |
+|     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+|     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+|     # | Total    | Lost              | Samples:          | 0                                          |                    |       |        |       |                        |          |                 |    |
+|     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+|     # | Samples: | 1K                | of                | event                                      | 'cpu_core/cycles/' |       |        |       |                        |          |                 |    |
+|     # | Event    | count             | (approx.):        | 1552000                                    |                    |       |        |       |                        |          |                 |    |
+|     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+|     # | Overhead | Command           | Shared            | Object                                     | Symbol             |       |        |       |                        |          |                 |    |
+|     # | ........ | .......           | ................. | .......................................... |                    |       |        |       |                        |          |                 |    |
+|     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+| 3.41% | emacs    | emacs-30.0.50     | [.]               | exec_byte_code                             |                    |       |        |       |                        |          |                 |    |
+| 2.71% | emacs    | emacs-30.0.50     | [.]               | set_buffer_internal_2                      |                    |       |        |       |                        |          |                 |    |
+| 2.26% | emacs    | emacs-30.0.50     | [.]               | assq_no_quit                               |                    |       |        |       |                        |          |                 |    |
+| 1.48% | emacs    | emacs-30.0.50     | [.]               | gobble_input                               |                    |       |        |       |                        |          |                 |    |
+| 1.48% | emacs    | libc.so.6         | [.]               | __memmove_avx_unaligned_erms               |                    |       |        |       |                        |          |                 |    |
+| 1.29% | emacs    | [kernel.kallsyms] | [k]               | pipe_read                                  |                    |       |        |       |                        |          |                 |    |
+| 1.22% | emacs    | [kernel.kallsyms] | [k]               | __fget_light                               |                    |       |        |       |                        |          |                 |    |
+| 1.16% | emacs    | emacs-30.0.50     | [.]               | re_match_2_internal                        |                    |       |        |       |                        |          |                 |    |
+| 1.03% | emacs    | [kernel.kallsyms] | [k]               | tty_ioctl                                  |                    |       |        |       |                        |          |                 |    |
+| 0.97% | emacs    | [kernel.kallsyms] | [k]               | copy_fpstate_to_sigframe                   |                    |       |        |       |                        |          |                 |    |
+| 0.90% | emacs    | [kernel.kallsyms] | [k]               | psi_group_change                           |                    |       |        |       |                        |          |                 |    |
+| 0.84% | emacs    | [kernel.kallsyms] | [k]               | ksys_read                                  |                    |       |        |       |                        |          |                 |    |
+| 0.84% | emacs    | libc.so.6         | [.]               | __errno_location                           |                    |       |        |       |                        |          |                 |    |
+| 0.77% | emacs    | [kernel.kallsyms] | [k]               | fput                                       |                    |       |        |       |                        |          |                 |    |
+| 0.77% | emacs    | [kernel.kallsyms] | [k]               | fsnotify_perm.part.0                       |                    |       |        |       |                        |          |                 |    |
+| 0.77% | emacs    | [kernel.kallsyms] | [k]               | kmem_cache_free                            |                    |       |        |       |                        |          |                 |    |
+| 0.77% | emacs    | [kernel.kallsyms] | [k]               | newidle_balance                            |                    |       |        |       |                        |          |                 |    |
+| 0.71% | emacs    | [kernel.kallsyms] | [k]               | vfs_read                                   |                    |       |        |       |                        |          |                 |    |
+| 0.71% | emacs    | emacs-30.0.50     | [.]               | bidi_cache_iterator_state                  |                    |       |        |       |                        |          |                 |    |
+| 0.71% | emacs    | emacs-30.0.50     | [.]               | bidi_level_of_next_char                    |                    |       |        |       |                        |          |                 |    |
+| 0.71% | emacs    | emacs-30.0.50     | [.]               | bidi_resolve_explicit                      |                    |       |        |       |                        |          |                 |    |
+| 0.71% | emacs    | emacs-30.0.50     | [.]               | bidi_resolve_weak                          |                    |       |        |       |                        |          |                 |    |
+| 0.71% | emacs    | emacs-30.0.50     | [.]               | deliver_input_available_signal             |                    |       |        |       |                        |          |                 |    |
+| 0.71% | emacs    | emacs-30.0.50     | [.]               | inhibit_garbage_collection                 |                    |       |        |       |                        |          |                 |    |
+| 0.64% | emacs    | [kernel.kallsyms] | [k]               | __get_user_8                               |                    |       |        |       |                        |          |                 |    |
+| 0.64% | emacs    | [kernel.kallsyms] | [k]               | apparmor_file_permission                   |                    |       |        |       |                        |          |                 |    |
+| 0.64% | emacs    | emacs-30.0.50     | [.]               | handle_input_available_signal              |                    |       |        |       |                        |          |                 |    |
+| 0.64% | emacs    | emacs-30.0.50     | [.]               | next_element_from_buffer                   |                    |       |        |       |                        |          |                 |    |
+| 0.64% | emacs    | libc.so.6         | [.]               | read                                       |                    |       |        |       |                        |          |                 |    |
+| 0.58% | emacs    | [kernel.kallsyms] | [k]               | cache_from_obj                             |                    |       |        |       |                        |          |                 |    |
+| 0.58% | emacs    | [kernel.kallsyms] | [k]               | do_syscall_64                              |                    |       |        |       |                        |          |                 |    |
+| 0.58% | emacs    | emacs-30.0.50     | [.]               | tty_read_avail_input                       |                    |       |        |       |                        |          |                 |    |
+| 0.58% | emacs    | emacs-30.0.50     | [.]               | unbind_to                                  |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | [kernel.kallsyms] | [k]               | __get_user_nocheck_4                       |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | [kernel.kallsyms] | [k]               | cpuacct_charge                             |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | [kernel.kallsyms] | [k]               | get_signal                                 |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | [kernel.kallsyms] | [k]               | perf_iterate_ctx                           |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | emacs-30.0.50     | [.]               | composition_compute_stop_pos               |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | emacs-30.0.50     | [.]               | move_it_in_display_line_to                 |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | emacs-30.0.50     | [.]               | store_symval_forwarding                    |                    |       |        |       |                        |          |                 |    |
+| 0.52% | emacs    | libc.so.6         | [.]               | __memrchr_avx2                             |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | [kernel.kallsyms] | [k]               | check_stack_object                         |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | [kernel.kallsyms] | [k]               | do_vfs_ioctl                               |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | [kernel.kallsyms] | [k]               | exit_to_user_mode_loop                     |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | [kernel.kallsyms] | [k]               | set_current_blocked                        |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | [kernel.kallsyms] | [k]               | update_curr                                |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | emacs-30.0.50     | [.]               | do_pending_atimers                         |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | emacs-30.0.50     | [.]               | kbd_buffer_store_buffered_event            |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | emacs-30.0.50     | [.]               | swap_in_symval_forwarding                  |                    |       |        |       |                        |          |                 |    |
+| 0.45% | emacs    | libc.so.6         | [.]               | __GI___fileno                              |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | __fsnotify_parent                          |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | __raw_spin_lock_irqsave                    |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | __schedule                                 |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | __tty_check_change.part.0                  |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | fpu__clear_user_states                     |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | native_write_msr                           |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | restore_fpregs_from_user                   |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | rw_verify_area                             |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | security_file_permission                   |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | signal_setup_done                          |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | [kernel.kallsyms] | [k]               | update_rq_clock                            |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | emacs-30.0.50     | [.]               | append_glyph                               |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | emacs-30.0.50     | [.]               | compile_pattern                            |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | emacs-30.0.50     | [.]               | emacs_intr_read                            |                    |       |        |       |                        |          |                 |    |
+| 0.39% | emacs    | emacs-30.0.50     | [.]               | kbd_on_hold_p                              |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | __update_idle_core                         |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | __wake_up_common                           |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | __wake_up_common_lock                      |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | _raw_spin_lock_irq                         |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | _raw_spin_trylock                          |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | collect_signal                             |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | dequeue_task_fair                          |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | entry_SYSRETQ_unsafe_stack                 |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | exit_to_user_mode_prepare                  |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | fsnotify                                   |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | handle_signal                              |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | n_tty_ioctl                                |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | native_irq_return_iret                     |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | [kernel.kallsyms] | [k]               | syscall_exit_to_user_mode                  |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | __errno_location@plt                       |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | bidi_cache_search.constprop.0              |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | bidi_find_bracket_pairs                    |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | bidi_get_type                              |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | bidi_move_to_visually_next                 |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | current_minor_maps                         |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | display_line                               |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | fileno@plt                                 |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | init_iterator                              |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | emacs-30.0.50     | [.]               | read@plt                                   |                    |       |        |       |                        |          |                 |    |
+| 0.32% | emacs    | libc.so.6         | [.]               | __GI___ioctl                               |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | __flush_smp_call_function_queue            |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | __rcu_read_lock                            |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | __rcu_read_unlock                          |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | __x64_sys_ioctl                            |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | _raw_spin_lock                             |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | cgroup_rstat_updated                       |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | clear_page_erms                            |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | copy_user_enhanced_fast_string             |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | folio_batch_move_lru                       |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | n_tty_read                                 |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | page_counter_try_charge                    |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | pollwake                                   |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | schedule                                   |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | tty_audit_add_data                         |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | [kernel.kallsyms] | [k]               | x64_setup_rt_frame                         |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | Fstring_equal                              |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | bidi_fetch_char                            |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | bidi_resolve_brackets                      |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | offset_intervals                           |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | plist_get                                  |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | probably_quit                              |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | resize_mini_window                         |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | set_default_internal                       |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | set_internal                               |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | specbind                                   |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | unchain_marker                             |                    |       |        |       |                        |          |                 |    |
+| 0.26% | emacs    | emacs-30.0.50     | [.]               | update_frame                               |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | __cond_resched                             |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | __fpu_restore_sig                          |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | __irq_exit_rcu                             |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | __put_user_8                               |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | __tty_check_change                         |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | __update_blocked_fair                      |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | __update_load_avg_cfs_rq                   |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | add_wait_queue                             |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | amd_clear_divider                          |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | arch_asym_cpu_priority                     |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | blk_cgroup_congested                       |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | dec_rlimit_put_ucounts                     |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | do_dec_rlimit_put_ucounts                  |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | do_sigaltstack.constprop.0                 |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | down_read                                  |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | entry_SYSCALL_64_after_hwframe             |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | ldsem_down_read                            |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | lookup_bh_lru                              |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | queue_work_on                              |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | send_call_function_single_ipi              |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | sync_regs                                  |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | update_load_avg                            |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | uprobe_deny_signal                         |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | [kernel.kallsyms] | [k]               | zero_buffer.isra.0                         |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | Fexpand_file_name                          |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | Ffind_file_name_handler                    |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | Fget                                       |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | adjust_markers_for_insert                  |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | bidi_cache_find                            |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | bidi_resolve_neutral                       |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | command_loop_1                             |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | count_size_as_multibyte                    |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | del_range_2                                |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | deliver_process_signal                     |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | find_symbol_value                          |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | funcall_general                            |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | funcall_subr                               |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | get_next_display_element                   |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | process_pending_signals                    |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | reset_buffer_local_variables               |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | emacs-30.0.50     | [.]               | set_iterator_to_next                       |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | libc.so.6         | [.]               | __GI___pthread_disable_asynccancel         |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | libc.so.6         | [.]               | __GI___pthread_enable_asynccancel          |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | libc.so.6         | [.]               | __memcmp_avx2_movbe                        |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | libc.so.6         | [.]               | __restore_rt                               |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | libc.so.6         | [.]               | __strcmp_avx2                              |                    |       |        |       |                        |          |                 |    |
+| 0.19% | emacs    | libc.so.6         | [.]               | __strlen_avx2                              |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | __alloc_pages                              |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | __count_memcg_events                       |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | __jbd2_journal_file_buffer                 |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | __kmem_cache_alloc_bulk                    |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | __mod_memcg_lruvec_state                   |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | __page_set_anon_rmap                       |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | __put_user_4                               |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | _raw_spin_unlock                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | _raw_spin_unlock_irqrestore                |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | arch_do_signal_or_restart                  |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | asm_sysvec_apic_timer_interrupt            |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | audit_signal_info_syscall                  |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | available_idle_cpu                         |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | copy_from_read_buf                         |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | dequeue_entity                             |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | dequeue_signal                             |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | do_filp_open                               |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | down_write                                 |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | entry_SYSCALL_64                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | expand_downwards                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | ext4_es_lookup_extent                      |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | ext4_sb_block_valid                        |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | file_tty_write.constprop.0                 |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | folio_lruvec_lock_irqsave                  |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | fpregs_assert_state_consistent             |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | hrtimer_interrupt                          |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | intel_pmu_disable_all                      |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | jbd2_journal_put_journal_head              |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | kill_fasync                                |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | kmem_cache_alloc                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | llist_reverse_order                        |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | mt_find                                    |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | mtree_range_walk                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | native_sched_clock                         |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | percpu_counter_add_batch                   |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | perf_ctx_disable                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | perf_pmu_nop_void                          |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | process_output_block                       |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | propagate_protected_usage                  |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | put_prev_task_fair                         |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | rebalance_domains                          |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | recalc_sigpending                          |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | restore_altstack                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | restore_fpregs_from_fpstate                |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | rmqueue                                    |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | select_idle_core                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | select_idle_cpu                            |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | siginfo_layout                             |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | update_cfs_group                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | update_dl_rq_load_avg                      |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | update_min_vruntime                        |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | [kernel.kallsyms] | [k]               | vma_alloc_folio                            |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | Fassq                                      |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | Fcurrent_buffer                            |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | Fdelq                                      |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | Fmake_closure                              |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | Fnreverse                                  |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | Frassq                                     |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | Fset_buffer                                |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | allocate_vectorlike                        |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | bidi_cache_ensure_space                    |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | bidi_explicit_dir_char.part.0              |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | char_charset                               |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | decode_next_window_args                    |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | emacs_read                                 |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | face_at_buffer_position                    |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | find_interval                              |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | fix_position                               |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | get_property_and_range                     |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | get_visually_first_element                 |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | handle_stop                                |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | insert_1_both.part.0                       |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | ioctl@plt                                  |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | itree_inherit_offset                       |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | lookup_char_property                       |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | lookup_glyphless_char_display              |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | message3_nolog                             |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | message_dolog.part.0                       |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | produce_glyphs                             |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | re_search_2                                |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | record_unwind_protect                      |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | record_unwind_protect_intmax               |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | row_hash                                   |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | set_cursor_from_row                        |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | tty_write_glyphs                           |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | unwind_to_catch                            |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | emacs-30.0.50     | [.]               | update_frame_line                          |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | libc.so.6         | [.]               | _itoa_word                                 |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | libc.so.6         | [.]               | cfree@GLIBC_2.2.5                          |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | libtinfo.so.6.3   | [.]               | _nc_tiparm                                 |                    |       |        |       |                        |          |                 |    |
+| 0.13% | emacs    | libtinfo.so.6.3   | [.]               | tputs                                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __alloc_file                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __calc_delta                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __cgroup_account_cputime                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __cgroup_account_cputime_field             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __change_pid                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __check_block_validity.constprop.0         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __check_heap_object                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __check_object_size.part.0                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __d_lookup_rcu                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __do_softirq                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __ext4_check_dir_entry                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __ext4_get_inode_loc                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __ext4_read_dirblock                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __fdget_pos                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __fput                                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __get_obj_cgroup_from_memcg                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __get_task_ioprio                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __get_user_nocheck_8                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __hrtimer_next_event_base                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __irqentry_text_end                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __jbd2_journal_temp_unlink_buffer          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __local_bh_enable_ip                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __mem_cgroup_charge                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __mod_lruvec_state                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __mod_memcg_state                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __perf_event_task_sched_out                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __put_user_nocheck_4                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __queue_work                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __radix_tree_lookup                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __rseq_handle_notify_resume                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __set_task_blocked                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __slab_free                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __update_load_avg_blocked_se               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __update_load_avg_se                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __virt_addr_valid                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __x64_sys_read                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | __x64_sys_rt_sigreturn                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | _find_next_and_bit                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | _raw_spin_lock_irqsave                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | _raw_spin_unlock_irq                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | _raw_write_lock_irq                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | account_system_index_time                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | apparmor_task_kill                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | arch_scale_freq_tick                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | blkcg_maybe_throttle_current               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | build_detached_freelist                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | cap_capable                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | check_cfs_rq_runtime                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | check_cpu_stall                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | cmpxchg_double_slab.constprop.0.isra.0     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | complete_signal                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | consume_obj_stock                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | crc_43                                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | crypto_shash_update                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | do_tty_write                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | do_unlinkat                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | down_read_trylock                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | down_write_killable                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | drain_stock                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | dx_probe                                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | error_return                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_dx_find_entry                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_fill_raw_inode                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_fname_from_fscrypt_name               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_inode_csum                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_mark_iloc_dirty                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_orphan_add                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_search_dir                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ext4_unlink                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | filename_parentat                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | finish_task_switch.isra.0                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | folio_add_lru                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | folio_add_lru_vma                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | fpu__alloc_mathframe                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | fpu__restore_sig                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | from_kuid_munged                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | get_obj_cgroup_from_current                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | get_page_from_freelist                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | handle_mm_fault                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | hrtimer_update_next_event                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | idr_find                                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | init_wait_entry                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | inode_maybe_inc_iversion                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | inode_permission                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | irq_enter_rcu                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | irq_fpu_usable                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | is_vmalloc_addr                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | jbd2__journal_start                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | jbd2_journal_add_journal_head              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | kfree                                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ktime_get                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | ktime_get_real_seconds                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | link_path_walk.part.0.constprop.0          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | lock_mm_and_find_vma                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | lockref_get_not_zero                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | mas_leaf_max_gap                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | mas_wr_store_setup                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | mas_wr_walk                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | migrate_task_rq_fair                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | mnt_user_ns                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | mntput_no_expire                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | mutex_lock                                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | mutex_unlock                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | n_tty_write                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | native_apic_msr_eoi_write                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | native_read_msr                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | native_set_pte                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | nohz_balance_exit_idle                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | path_openat                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | perf_adjust_freq_unthr_context             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | perf_ctx_enable                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | perf_event_mmap                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | pick_file                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | pick_next_task_rt                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | pids_release                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | pmd_val                                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | prepare_signal                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | prepare_task_switch                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | psi_task_switch                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | pud_val                                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | put_task_struct_rcu_user                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | raw_spin_rq_lock_nested                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | rb_next                                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | rcu_cblist_dequeue                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | rcu_note_context_switch                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | rcu_sched_clock_irq                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | rcu_segcblist_advance                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | record_times                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | release_pages                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | remote_function                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | remove_wait_queue                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | restore_sigcontext                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | rseq_get_rseq_cs.isra.0                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | rseq_ip_fixup                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | scheduler_tick                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | security_inode_unlink                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | security_path_unlink                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | select_task_rq_fair                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | set_pte                                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | set_root                                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | set_task_cpu                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | step_into                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | str2hashbuf_signed                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | strlen                                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | syscall_enter_from_user_mode               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | syscall_return_via_sysret                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | task_h_load                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | task_tick_fair                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | timerqueue_add                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | tty_jobctrl_ioctl                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | tty_read                                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | tty_set_termios                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | tty_termios_input_baud_rate                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | tty_wakeup                                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | up_write                                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | vfs_unlink                                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | vfs_write                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | wait_consider_task                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | [kernel.kallsyms] | [k]               | xfd_validate_state                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | FUNCTIONP                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Factive_minibuffer_window                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fcar                                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fcommand_error_default_function            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fcons                                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fdelete_file_internal                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Ffollowing_char                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fget_buffer                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fget_buffer_create                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fget_buffer_create.part.0                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fget_pos_property                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Flocal_variable_p                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fmarker_buffer                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fmemq                                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fnext_property_change                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Fnext_single_property_change               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Ftext_properties_at                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | Ftext_quoting_style                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | active_maps                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | adjust_overlays_for_insert                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | allocate_string_data                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | allow_garbage_collection                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | append_space_for_newline                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | bcall0                                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | bidi_paired_bracket_type                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | bidi_paragraph_init                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | bitch_at_user                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | build_frame_matrix_from_window_tree        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | call_process_kill                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | cancel_hourglass                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | candidate_buffer                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | candidate_window_p                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | clear_glyph_matrix                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | clear_window_matrices                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | cmgoto                                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | cmputc                                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | coding_charset_list                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | compute_display_string_pos                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | consume_chars                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | default_value                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | del_range                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | delete_all_overlays                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | deliver_interrupt_signal                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | echo_area_display                          |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | encode_coding                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | encode_coding_object                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | encode_file_name                           |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | ensure_echo_area_buffers                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | find_newline                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | get_char_property_and_overlay              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | get_named_terminal                         |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | graft_intervals_into_buffer                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | handle_alarm_signal                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | handle_composition_prop                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | handle_display_prop                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | hscrolling_current_line_p                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | insert_1_both                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | invalidate_buffer_caches                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | itree_iterator_next                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | itree_iterator_start                       |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | memcmp@plt                                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | memcpy@plt                                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | message3                                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | mirror_make_current                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | move_it_to                                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | overlays_at                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | prepare_to_modify_buffer_1                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | print_finish                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | produce_special_glyphs                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | re_search                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | report_interval_modification               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | run_hook_wrapped_funcall                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | safe_call                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | scan_newline                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | set_marker_restricted_both                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | setup_echo_area_for_printing               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | signal_or_quit                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | strlen@plt                                 |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | this_minibuffer_depth                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | tputs@plt                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | tty_cursor_to                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | tty_turn_off_highlight                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | turn_on_face                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | unwind_re_match                            |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | unwind_with_echo_area_buffer               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | update_frame_1                             |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | validate_interval_range                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | window_wants_header_line                   |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | emacs-30.0.50     | [.]               | window_wants_mode_line                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    |      | [.]               | with_echo_area_buffer                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | _IO_file_xsputn@@GLIBC_2.2.5               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | _IO_old_init                               |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __GI___fflush_unlocked                     |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __GI___kill                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __GI___pthread_cleanup_upto                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __GI___pthread_self                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __GI___unlink                              |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __sigsetjmp                                |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __tfind                                    |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __vfprintf_internal                        |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | __waitpid                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | _int_free                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libc.so.6         | [.]               | tcsetattr                                  |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libtinfo.so.6.3   | [.]               | tgoto                                      |                    |       |        |       |                        |          |                 |    |
+| 0.06% | emacs    | libtinfo.so.6.3   | [.]               | 0x000000000000f1c4                         |                    |       |        |       |                        |          |                 |    |
+|       |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+|       |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+|     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+|     # | (Tip:    | Limit             | to                | show                                       | entries            | above |     5% | only: | perf                   | report   | --percent-limit | 5) |
+|     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
+
+[[file:emacs/README.org][profile emacs itself]] has given less than interesting information. I think we will have to user perf record.
 
 emacs-lisp profiling
 
-execrcising the code
+* exercizing the code.
+
+                #:from (current-buffer)
+		#(property "person" "Bob")
+#+BEGIN_SRC elisp :results list :exports both :cache yes
+        (org-ql-query :select '(org-get-heading :no-tags)
+      		)
+#+END_SRC
+
+#+RESULTS[d6b0c2de6e74648027eaa581e77a61a9b0f91115]:
+- Introduction
+- Project Structure
+- Emacspeak
+- Learning Journey
+- Best Practices
+- Conclusion
+- Ideas
+- analysis
+- static analysis
+- dynamic analysis
+- exercizing the code.
+
+
+
 
 Test of using emacs
 
+
+
+
+#+begin_src shell
+  sudo perf annotate -d emacs-30.0.50  --input=last-recording  > emacsannotate
+#+end_src
+
+#+RESULTS:
+
+
+Here are the instructions that were used
+#+begin_src txt
+    1.89 :   269e1e: mov    %rdi,0x18(%rdx)
+    1.89 :   269ef2: mov    (%rbx,%rax,8),%rax
+    1.89 :   269f82: mov    (%rsp),%rcx
+    1.89 :   269fbf: mov    0x8(%rsp),%rax
+    1.89 :   26a090: mov    (%rax),%r14
+    1.89 :   26a0e3: cmp    0x78(%rdx),%rax
+    1.89 :   26a190: jne    26a3a8 <exec_byte_code+0x618>
+    1.89 :   26a1c0: jmp    *%rax
+    5.66 :   269ee5: movzbl (%rax),%eax
+    9.43 :   26a11f: mov    0x18(%rax),%rdi
+   11.32 :   269e56: mov    0x18(%r8),%rbx
+   11.32 :   26a13e: and    -0x5(%rdi),%rax
+#+end_src
+
+#+begin_src txt
+    0.00 :   269e52: mov    %rbx,(%rsp)
+         : 517    SDATA():
+         : 1680   return XSTRING (string)->u.s.data;
+   11.32 :   269e56: mov    0x18(%r8),%rbx
+         : 1682   exec_byte_code():
+         : 524    int mandatory = args_template & 127;
+
+#+end_src
