@@ -36,7 +36,7 @@ perf
 
 Consider this attempt at an org mode babel script,
 we want to get the current emacs pid and then record its activity
-ob-async-org-babel-execute-src-block
+use ob-async-org-babel-execute-src-block
 #+begin_src shell :var PID=(emacs-pid) :async
    #echo $PID
    sudo perf record --all-cpus --realtime=1 --pid $PID --output last-recording --count=1000 &
@@ -603,11 +603,15 @@ ob-async-org-babel-execute-src-block is what is needed for ob-async
 |     # | (Tip:    | Limit             | to                | show                                       | entries            | above |     5% | only: | perf                   | report   | --percent-limit | 5) |
 |     # |          |                   |                   |                                            |                    |       |        |       |                        |          |                 |    |
 
-[[file:emacs/README.org][profile emacs itself]] has given less than interesting information. I think we will have to user perf record.
+[[file:emacs/README.org][profile
+emacs itself]] has given less than interesting information. I think we will have to user perf record.
 
-emacs-lisp profiling
+** emacs-lisp profiling
 
-* exercizing the code.
+profiler-start
+profiler-report
+
+* * exercizing the code.
 
                 #:from (current-buffer)
 		#(property "person" "Bob")
