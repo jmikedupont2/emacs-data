@@ -52,3 +52,27 @@
 [submodule "vendor/emacs/lsp/ccls"]
 	path = vendor/emacs/lsp/ccls
 	url = https://github.com/MaskRay/ccls
+[submodule "vendor/emacs/org/org-wiki"]
+	path = vendor/emacs/org/org-wiki
+	url = https://github.com/caiorss/org-wiki
+[submodule "vendor/emacs/org/org-index"]
+	path = vendor/emacs/org/org-index
+	url = https://github.com/marcIhm/org-index
+[submodule "vendor/emacs/org/org-roam"]
+	path = vendor/emacs/org/org-roam
+	url = https://github.com/org-roam/org-roam
+[submodule "vendor/emacs/packaging/org-roam"]
+	path = vendor/emacs/packaging/org-roam
+	url = https://github.com/org-roam/org-roam
+[submodule "vendor/emacs/packaging/eldev"]
+	path = vendor/emacs/packaging/eldev
+	url = https://github.com/emacs-eldev/eldev
+[submodule "vendor/emacs/org/orger"]
+	path = vendor/emacs/org/orger
+	url = https://github.com/karlicoss/orger
+[submodule "vendor/emacs/org/microfts"]
+	path = vendor/emacs/org/microfts
+	url = https://github.com/zot/microfts
+[submodule "vendor/emacs/llm/ollama"]
+	path = vendor/emacs/llm/ollama
+	url = https://github.com/zweifisch/ollama
