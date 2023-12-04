@@ -75,4 +75,4 @@
 	url = https://github.com/zot/microfts
 [submodule "vendor/emacs/llm/ollama"]
 	path = vendor/emacs/llm/ollama
-	url = https://github.com/zweifisch/ollama
+	url = https://github.com/meta-introspector/ollama-emacs
