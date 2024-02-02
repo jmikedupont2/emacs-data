@@ -76,3 +76,9 @@
 [submodule "vendor/emacs/llm/ollama"]
 	path = vendor/emacs/llm/ollama
 	url = https://github.com/meta-introspector/ollama-emacs
+[submodule "vendor/emacs/lsp/lsp-mode"]
+	path = vendor/emacs/lsp/lsp-mode
+	url = https://github.com/emacs-lsp/lsp-mode
+[submodule "vendor/emacs/org/org-contrib"]
+	path = vendor/emacs/org/org-contrib
+	url = https://github.com/emacsmirror/org-contrib
